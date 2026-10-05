@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AHLAWY — Full Demo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#070b12;color:#f5f7fb}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
+:root{--red:#d71920;--red2:#ff3038;--card:#111827;--card2:#172033;--muted:#9ca8bb;--gold:#f5c542}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 20% 10%,#5b0d1530,transparent 35%),radial-gradient(circle at 80% 80%,#d7192020,transparent 35%);pointer-events:none}
+.app{max-width:1180px;margin:auto;padding:18px;position:relative}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}.brand{font-weight:1000;font-size:30px;letter-spacing:2px}.brand span{color:var(--red2)}.coins{background:#1c2434;border:1px solid #303b50;padding:9px 14px;border-radius:14px;color:#ffd75a;font-weight:900}
+.screen{display:none}.screen.active{display:block}.hero{padding:35px 20px;text-align:center;background:linear-gradient(145deg,#111827dd,#270b10dd);border:1px solid #3a2630;border-radius:28px;box-shadow:0 20px 60px #0008}.logo{width:110px;height:110px;border-radius:50%;margin:auto;display:grid;place-items:center;background:linear-gradient(145deg,#e21b23,#79090d);font-size:48px;font-weight:1000;box-shadow:0 0 35px #e21b2355}.subtitle{color:var(--muted);margin:10px 0 25px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px}.card{background:linear-gradient(145deg,var(--card),#0d1420);border:1px solid #263246;border-radius:19px;padding:17px}.card h3{margin:0 0 8px}.muted{color:var(--muted)}.btn{background:linear-gradient(135deg,var(--red2),#a80e15);color:white;padding:12px 17px;border-radius:13px;font-weight:900;margin:4px}.btn.alt{background:#202b3d}.btn.gold{background:linear-gradient(135deg,#f5c542,#b77c00);color:#17120a}.btn.green{background:linear-gradient(135deg,#1ca56d,#08764a)}.btn:disabled{opacity:.45;cursor:not-allowed}.nav{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}.nav button{background:#141d2c;color:#cdd6e5;border:1px solid #263246;border-radius:11px;padding:9px 12px}.form{max-width:520px;margin:20px auto}.input{width:100%;padding:13px;margin:6px 0;background:#0d1420;color:white;border:1px solid #2c394d;border-radius:12px}.list{display:grid;gap:9px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px;background:#0d1420;border-radius:13px}.pill{padding:4px 8px;border-radius:99px;background:#242f42;color:#b8c5d9;font-size:12px}.question{font-size:22px;font-weight:900;line-height:1.6;margin:20px 0}.answers{display:grid;gap:10px}.answer{background:#172235;color:white;border:1px solid #314057;padding:14px;border-radius:14px;text-align:right}.answer.good{background:#116b49}.answer.bad{background:#76242b}.timer{font-size:38px;font-weight:1000;color:#ff535b;text-align:center}.bar{height:9px;background:#202a3a;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--red2);width:100%;transition:.2s}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111827;border:1px solid #35445b;padding:12px 17px;border-radius:14px;display:none;z-index:5}.avatar{width:70px;height:70px;border-radius:50%;background:#252f42;display:grid;place-items:center;font-size:35px;border:2px solid #5b6b83}.center{text-align:center}.danger{color:#ff6a72}.success{color:#56e39a}.small{font-size:13px}.shop{position:relative}.price{color:#ffd75a;font-weight:900}.footer{text-align:center;color:#66758c;margin:30px 0 10px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="brand">🦅 <span>AHLAWY</span></div><div class="coins">🪙 <span id="coin">50</span></div></div>
+
+<section id="login" class="screen active">
+<div class="hero">
+<div class="logo">🦅</div><h1>AHLAWY</h1><div class="subtitle">Full Demo — جرّب كل أنظمة اللعبة</div>
+<div class="form">
+<input id="user" class="input" placeholder="اسم المستخدم">
+<input id="pass" class="input" placeholder="كلمة المرور" type="password">
+<button class="btn" onclick="login()">دخول / إنشاء حساب</button>
+<p class="muted small">أي حساب جديد يحصل على 🎁 50 Coin ترحيب مرة واحدة</p>
+</div></div>
+</section>
+
+<section id="home" class="screen">
+<div class="nav"><button onclick="show('home')">الرئيسية</button><button onclick="show('profile')">الملف</button><button onclick="show('store')">المتجر</button><button onclick="show('streak')">🔥 Streak</button><button onclick="show('ach')">🏆 الإنجازات</button><button onclick="show('stats')">📊 الإحصائيات</button><button onclick="show('admin')">👑 الإدارة التجريبية</button><button onclick="logout()">خروج</button></div>
+<div class="hero"><h1>أهلاً يا <span id="hello"></span> 🦅</h1><p class="muted">دي نسخة تجريبية شاملة — كل الأنظمة هنا قابلة للتجربة بشكل محلي</p></div>
+<div class="grid" style="margin-top:15px">
+<div class="card"><h3>🌐 Online</h3><p class="muted">غرف، كود، باسورد، Ready، Countdown، Timer</p><button class="btn" onclick="show('online')">ادخل</button></div>
+<div class="card"><h3>🎮 Offline</h3><p class="muted">Solo، AI، Sudden Death، 1v1، 4 Players، Speed</p><button class="btn" onclick="show('offline')">ادخل</button></div>
+<div class="card"><h3>🛒 Store</h3><p class="muted">Avatars، Titles، Badges، Coins، Passes</p><button class="btn" onclick="show('store')">فتح</button></div>
+<div class="card"><h3>👑 العب مع محمد</h3><p class="muted">حجز مباراة تجريبية بـ100 Coin</p><button class="btn gold" onclick="bookMohamed()">احجز</button></div>
+</div>
+</section>
+
+<section id="online" class="screen">
+<div class="nav"><button onclick="show('home')">← الرئيسية</button></div>
+<div class="hero"><h2>🌐 Online Lobby</h2><p class="muted">محاكاة كاملة للـOnline على نفس الجهاز</p>
+<div class="grid">
+<div class="card"><h3>إنشاء غرفة</h3><select id="roomsize" class="input"><option>1v1</option><option>2v2</option><option>4 Players</option></select><select id="privacy" class="input"><option>Public</option><option>Private</option></select><input id="roompass" class="input" placeholder="الباسورد (اختياري)">
+<button class="btn" onclick="createRoom()">إنشاء الغرفة</button></div>
+<div class="card"><h3>دخول بكود</h3><input id="joincode" class="input" placeholder="مثال: AH7K2"><input id="joinpass" class="input" placeholder="الباسورد"><button class="btn" onclick="joinRoom()">دخول</button></div>
+<div class="card"><h3>غرف عامة</h3><div id="rooms" class="list"></div></div>
+</div></div></section>
+
+<section id="room" class="screen">
+<div class="hero"><h2>🏟️ الغرفة <span id="rcode"></span></h2><p id="roominfo" class="muted"></p><div id="players" class="list"></div><div style="margin:12px"><button class="btn green" onclick="ready()">جاهز</button><button class="btn" onclick="startQuiz('online')">ابدأ التجربة</button><button class="btn alt" onclick="show('online')">خروج من الغرفة</button></div><div id="qr" class="card">▦ QR تجريبي<br><span class="small muted">في النسخة النهائية يتولد QR حقيقي</span></div></div>
+</section>
+
+<section id="offline" class="screen"><div class="nav"><button onclick="show('home')">← الرئيسية</button></div><div class="hero"><h2>🎮 Offline Modes</h2><div class="grid">
+<div class="card"><h3>Solo</h3><button class="btn" onclick="startQuiz('solo')">لعب</button></div>
+<div class="card"><h3>🤖 ضد AI</h3><button class="btn" onclick="startQuiz('ai')">لعب</button></div>
+<div class="card"><h3>💀 Sudden Death</h3><button class="btn" onclick="startQuiz('sudden')">لعب</button></div>
+<div class="card"><h3>👥 1v1 محلي</h3><button class="btn" onclick="passPhone(2)">لعب</button></div>
+<div class="card"><h3>👥 4 Players</h3><button class="btn" onclick="passPhone(4)">لعب</button></div>
+<div class="card"><h3>⚡ Speed Quiz</h3><button class="btn" onclick="startQuiz('speed')">لعب</button></div>
+</div></div></section>
+
+<section id="passphone" class="screen"><div class="hero"><h2>📱 سلّم الموبايل</h2><p id="passmsg" class="question"></p><button class="btn" onclick="startQuiz('local')">Start</button></div></section>
+
+<section id="quiz" class="screen"><div class="hero"><div class="timer" id="timer">15</div><div class="bar"><i id="timerbar"></i></div><div class="pill" id="qmeta">سهل • الأهلي</div><div class="question" id="question"></div><div class="answers" id="answers"></div><div style="margin-top:14px"><button class="btn alt" onclick="power('5050')">50/50</button><button class="btn alt" onclick="power('freeze')">❄ Freeze</button><button class="btn gold" onclick="power('double')">×2</button><button class="btn alt" onclick="power('shield')">🛡 Shield</button></div><p class="muted small">الـDemo تستخدم بنكًا صغيرًا فقط للاختبار — ليس بنك النسخة النهائية</p></div></section>
+
+<section id="result" class="screen"><div class="hero center"><h1 id="resulttitle">🔥 النتيجة</h1><p id="resulttext" class="question"></p><button class="btn" onclick="show('home')">الرئيسية</button><button class="btn alt" onclick="startQuiz(currentMode)">إعادة اللعب</button></div></section>
+
+<section id="profile" class="screen"><div class="nav"><button onclick="show('home')">←</button></div><div class="hero"><div class="avatar" style="margin:auto">🦅</div><h2 id="pname"></h2><p class="muted">Level <b id="level">1</b> • XP <span id="xp">0</span>/100</p><div class="grid"><div class="card">رقم القميص<br><b>19</b></div><div class="card">Title<br><b>أهلاوي أصيل</b></div><div class="card">Badges<br><b>🦅 🔥</b></div></div></div></section>
+
+<section id="store" class="screen"><div class="nav"><button onclick="show('home')">←</button></div><div class="hero"><h2>🛒 Store</h2><div class="grid">
+<div class="card shop"><h3>🦅 Avatar أساسي</h3><p class="price">مجاني</p><button class="btn green" onclick="buy(0,'Avatar')">استخدم</button></div>
+<div class="card shop"><h3>🔥 Avatar أسطوري</h3><p class="price">100 🪙</p><button class="btn" onclick="buy(100,'Avatar أسطوري')">شراء</button></div>
+<div class="card"><h3>👑 Title: الملك</h3><p class="price">150 🪙</p><button class="btn" onclick="buy(150,'Title')">شراء</button></div>
+<div class="card"><h3>🏅 Badge نادر</h3><p class="price">80 🪙</p><button class="btn" onclick="buy(80,'Badge')">شراء</button></div>
+<div class="card"><h3>🎵 Sound Pack</h3><p class="price">60 🪙</p><button class="btn" onclick="buy(60,'Sound Pack')">شراء</button></div>
+<div class="card"><h3>⭐ Pass أسبوعي</h3><p class="price">20 جنيه</p><button class="btn gold" onclick="payment('Weekly Pass')">طلب تفعيل</button></div>
+<div class="card"><h3>⭐ Pass شهري</h3><p class="price">60 جنيه</p><button class="btn gold" onclick="payment('Monthly Pass')">طلب تفعيل</button></div>
+<div class="card"><h3>⭐ Pass 6 شهور</h3><p class="price">250 جنيه</p><button class="btn gold" onclick="payment('6 Months Pass')">طلب تفعيل</button></div>
+<div class="card"><h3>⭐ Pass سنة</h3><p class="price">400 جنيه</p><button class="btn gold" onclick="payment('Year Pass')">طلب تفعيل</button></div>
+</div><hr style="border-color:#283447;margin:25px 0"><h2>🪙 شراء Coins</h2><div class="grid">
+<div class="card"><b>100 Coins</b><p class="price">20 جنيه</p><button class="btn gold" onclick="payment('100 Coins')">شراء</button></div>
+<div class="card"><b>150 Coins</b><p class="price">25 جنيه</p><button class="btn gold" onclick="payment('150 Coins')">شراء</button></div>
+<div class="card"><b>300 Coins</b><p class="price">45 جنيه</p><button class="btn gold" onclick="payment('300 Coins')">شراء</button></div>
+<div class="card"><b>700 Coins</b><p class="price">90 جنيه</p><button class="btn gold" onclick="payment('700 Coins')">شراء</button></div>
+</div></div></section>
+
+<section id="payment" class="screen"><div class="hero form"><h2>💳 طلب شراء</h2><p id="payitem"></p><p>حوّل على الرقم: <b>01227802787</b></p><input id="sender" class="input" placeholder="الرقم اللي حولت منه"><input id="ptime" class="input" type="datetime-local"><input id="receipt" class="input" type="file" accept="image/*"><textarea id="note" class="input" placeholder="ملاحظات"></textarea><button class="btn gold" onclick="submitPayment()">إرسال للإدارة</button><button class="btn alt" onclick="show('store')">رجوع</button></div></section>
+
+<section id="streak" class="screen"><div class="hero"><h2>🔥 Daily Streak</h2><p class="muted">مكافأة يومية لا تتراكم، ولو يوم ضاع يحصل Reset</p><div class="grid"><div class="card">Day 1<br><b>10 🪙</b></div><div class="card">Day 2<br><b>15 🪙</b></div><div class="card">Day 3<br><b>20 🪙</b></div><div class="card">Day 7<br><b>50 🪙</b></div></div><button class="btn" onclick="claimStreak()">استلام مكافأة اليوم</button><button class="btn alt" onclick="show('home')">رجوع</button></div></section>
+
+<section id="ach" class="screen"><div class="hero"><h2>🏆 Achievements</h2><div class="list">
+<div class="row"><span>أول فوز 🦅</span><span class="pill">مجاني</span></div>
+<div class="row"><span>10 إجابات صحيحة 🔥</span><span class="pill">مجاني</span></div>
+<div class="row"><span>ملك الـ1v1 👑</span><button class="btn gold" onclick="buy(120,'Achievement')">120 🪙</button></div>
+<div class="row"><span>الأسطوري ⚫</span><button class="btn gold" onclick="buy(300,'Achievement')">300 🪙</button></div>
+</div><button class="btn alt" onclick="show('home')">رجوع</button></div></section>
+
+<section id="stats" class="screen"><div class="hero"><h2>📊 Stats</h2><div class="grid"><div class="card">Games<br><b>0</b></div><div class="card">Wins<br><b>0</b></div><div class="card">Best Score<br><b>0</b></div><div class="card">Questions<br><b>0</b></div></div><h3>Top 5 — Demo</h3><div class="list"><div class="row">1. AhlawyKing <b>1200</b></div><div class="row">2. AhlyFan <b>980</b></div><div class="row">3. ElAhly <b>850</b></div><div class="row">4. RedGiant <b>700</b></div><div class="row">5. Ultra19 <b>650</b></div></div><button class="btn alt" onclick="show('home')">رجوع</button></div></section>
+
+<section id="admin" class="screen"><div class="hero"><h2>👑 Demo Admin Panel</h2><p class="danger">للاختبار فقط — في النسخة الحقيقية صلاحيات الإدارة تكون على السيرفر</p><div class="grid">
+<div class="card"><h3>Players</h3><p>3 Demo Players</p><button class="btn" onclick="toast('عرض اللاعبين التجريبي')">فتح</button></div>
+<div class="card"><h3>Payment Requests</h3><p id="adminpay">0 طلب</p><button class="btn" onclick="toast('طلبات الدفع تظهر هنا')">مراجعة</button></div>
+<div class="card"><h3>Reports</h3><p>0 بلاغات</p><button class="btn" onclick="toast('قسم البلاغات')">فتح</button></div>
+<div class="card"><h3>Coins</h3><button class="btn gold" onclick="addCoins(100)">+100 للاختبار</button></div>
+</div><button class="btn alt" onclick="show('home')">رجوع</button></div></section>
+
+<div class="footer">made by Mohamed Ahmed<br>01227802787</div>
+</div><div id="toast" class="toast"></div>
+<script>
+const qs=[
+["من هو هداف الأهلي التاريخي في دوري أبطال أفريقيا؟",["محمد أبو تريكة","محمود الخطيب","وليد سليمان","عماد متعب"],0,"متوسط","الأهلي"],
+["كم ثانية مرت قبل هدف أفشة في نهائي 2020 تقريبًا؟",["85:45","75:20","90:00","62:10"],0,"سهل","المباريات"],
+["ما لقب الأهلي الشهير؟",["نادي القرن","الزعيم","المارد الأحمر","كل ما سبق"],3,"سهل","الأهلي"],
+["أي بطولة قارية حققها الأهلي مرات عديدة؟",["دوري أبطال أفريقيا","كوبا أمريكا","يوروبا ليج","آسيا"],0,"سهل","أفريقيا"],
+["أي عنصر يحدد عدد ثواني السؤال في هذا الـDemo؟",["15 ثانية","5 ثواني","30 دقيقة","لا يوجد"],0,"سهل","Mixed"],
+["أسئلة المستوى الأسطوري في النسخة النهائية ستكون:",["أصعب وأدق","أسهل من السهل","بدون إجابات","مكررة"],0,"أسطوري","Mixed"]
+];
+let user=localStorage.getItem("ah_user")||"",coins=+(localStorage.getItem("ah_coins")||0),currentMode="solo",qi=0,score=0,timerInt=null,time=15,powers={double:false,shield:false,freeze:false},payItem="";
+function sync(){document.getElementById("coin").textContent=coins; if(user)document.getElementById("hello").textContent=user;localStorage.setItem("ah_coins",coins)}
+function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");sync();if(id==="profile")document.getElementById("pname").textContent=user}
+function login(){let u=document.getElementById("user").value.trim(),p=document.getElementById("pass").value;if(!u||!p)return toast("اكتب اسم المستخدم والباسورد");let key="ah_account_"+u;if(!localStorage.getItem(key)){localStorage.setItem(key,JSON.stringify({u,p}));coins=50;toast("🎁 تم إنشاء الحساب +50 Coin")}else{let a=JSON.parse(localStorage.getItem(key));if(a.p!==p)return toast("بيانات الدخول غلط");coins=+(localStorage.getItem("ah_coins_"+u)||50)}user=u;localStorage.setItem("ah_user",u);localStorage.setItem("ah_coins_"+u,coins);show("home")}
+function logout(){localStorage.removeItem("ah_user");user="";show("login")}
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.style.display="block";setTimeout(()=>x.style.display="none",2200)}
+function createRoom(){let c=Math.random().toString(36).slice(2,7).toUpperCase();localStorage.setItem("demo_room",JSON.stringify({c,size:roomsize.value,privacy:privacy.value,pass:roompass.value}));document.getElementById("rcode").textContent=c;document.getElementById("roominfo").textContent=roomsize.value+" • "+privacy.value+" • Demo";document.getElementById("players").innerHTML='<div class="row">🦅 '+user+' <span class="pill">Host</span></div><div class="row">Waiting for player… <span class="pill">Waiting</span></div>';show("room")}
+function joinRoom(){let c=joincode.value.trim().toUpperCase();let r=JSON.parse(localStorage.getItem("demo_room")||"null");if(!r||r.c!==c)return toast("الكود غير موجود في الـDemo");if(r.privacy==="Private"&&r.pass!==joinpass.value)return toast("الباسورد غلط");document.getElementById("rcode").textContent=c;document.getElementById("roominfo").textContent=r.size+" • "+r.privacy;document.getElementById("players").innerHTML='<div class="row">🦅 Host <span class="pill">Ready</span></div><div class="row">🦅 '+user+' <span class="pill">Joined</span></div>';show("room")}
+function ready(){toast("تم تسجيل Ready ✅")}
+function passPhone(n){document.getElementById("passmsg").textContent="سلّم الموبايل للاعب "+(n===2?"2":"2 و3 و4")+" ثم اضغط Start";show("passphone")}
+function startQuiz(mode){currentMode=mode;qi=0;score=0;powers={double:false,shield:false,freeze:false};show("quiz");renderQ()}
+function renderQ(){clearInterval(timerInt);let q=qs[qi%qs.length];document.getElementById("qmeta").textContent=q[3]+" • "+q[5];document.getElementById("question").textContent=q[0];let arr=q[1].map((a,i)=>({a,i})).sort(()=>Math.random()-.5);document.getElementById("answers").innerHTML=arr.map(x=>`<button class="answer" onclick="answer(${x.i},this)">${x.a}</button>`).join("");time=modeTime();updateTimer();timerInt=setInterval(()=>{time--;updateTimer();if(time<=0){clearInterval(timerInt);toast("⏰ الوقت خلص");nextQ()}},1000)}
+function modeTime(){return currentMode==="speed"?8:currentMode==="sudden"?10:15}
+function updateTimer(){document.getElementById("timer").textContent=time;document.getElementById("timerbar").style.width=(time/modeTime()*100)+"%"}
+function answer(i,el){clearInterval(timerInt);let q=qs[qi%qs.length];document.querySelectorAll(".answer").forEach(x=>x.disabled=true);if(i===q[2]){el.classList.add("good");score+=powers.double?2:1;toast("إجابة صحيحة 🔥")}else{el.classList.add("bad");toast("إجابة غلط");if(powers.shield)toast("🛡 Shield حماك من العقوبة")}setTimeout(nextQ,650)}
+function nextQ(){qi++;if(qi>=5){let reward=currentMode==="online"?10:0;coins+=reward;localStorage.setItem("ah_coins_"+user,coins);document.getElementById("resulttitle").textContent="🦅 انتهت اللعبة";document.getElementById("resulttext").textContent="Score: "+score+" / 5"+(reward? " — فوز تجريبي +"+reward+" Coins":"");show("result")}else renderQ()}
+function power(p){if(p==="5050"){let btns=[...document.querySelectorAll(".answer")];btns.forEach((b,i)=>{if(i>1)b.disabled=true});toast("50/50 تجريبية")}else if(p==="freeze"){clearInterval(timerInt);setTimeout(()=>{timerInt=setInterval(()=>{time--;updateTimer();if(time<=0){clearInterval(timerInt);nextQ()}},1000)},3000);toast("❄ الوقت متجمد 3 ثواني")}else if(p==="double"){powers.double=true;toast("×2 مفعّل للسؤال")}else if(p==="shield"){powers.shield=true;toast("🛡 Shield مفعّل")}}
+function buy(n,name){if(coins<n)return toast("❌ Coins مش كفاية");coins-=n;localStorage.setItem("ah_coins_"+user,coins);toast("✅ اشتريت "+name)}
+function payment(item){payItem=item;document.getElementById("payitem").textContent="الطلب: "+item;show("payment")}
+function submitPayment(){if(!sender.value||!ptime.value)return toast("اكتب رقم التحويل والوقت");let n=+(localStorage.getItem("ah_pay")||0)+1;localStorage.setItem("ah_pay",n);document.getElementById("adminpay").textContent=n+" طلب";toast("📨 تم إرسال الطلب للإدارة — Demo");show("store")}
+function claimStreak(){let today=new Date().toDateString(),last=localStorage.getItem("streak_day");if(last===today)return toast("استلمت مكافأة اليوم بالفعل");coins+=10;localStorage.setItem("streak_day",today);localStorage.setItem("ah_coins_"+user,coins);toast("🔥 +10 Coins")}
+function bookMohamed(){if(coins<100)return toast("الحجز يحتاج 100 Coin");coins-=100;localStorage.setItem("ah_coins_"+user,coins);toast("📅 تم إرسال طلب حجز مع محمد — Demo")}
+function addCoins(n){coins+=n;localStorage.setItem("ah_coins_"+user,coins);toast("👑 تمت إضافة "+n+" Coins")}
+(function init(){if(user){show("home")}sync();let r=JSON.parse(localStorage.getItem("demo_room")||"null");if(r)document.getElementById("rooms").innerHTML='<div class="row">Room '+r.c+' <button class="btn" onclick="joincode.value=\''+r.c+'\';joinRoom()">Join</button></div>';else document.getElementById("rooms").innerHTML='<div class="muted">لا توجد غرف حالياً</div>'})()
+</script>
+</body></html>
